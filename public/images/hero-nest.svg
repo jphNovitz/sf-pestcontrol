@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 600" role="img" aria-labelledby="title desc">
+  <title id="title">Nid sous une corniche</title>
+  <desc id="desc">Illustration d'une maison avec un nid de guepes ou de frelons sous la toiture.</desc>
+  <rect width="960" height="600" fill="#f4f4f5"/>
+  <path d="M0 410h960v190H0z" fill="#d9e4d4"/>
+  <path d="M68 382h824v34H68z" fill="#52525b"/>
+  <path d="M118 210h704v172H118z" fill="#fafafa"/>
+  <path d="M92 196h756l-48-76H140z" fill="#27272a"/>
+  <path d="M160 245h120v137H160zM345 245h120v137H345zM530 245h120v137H530z" fill="#e4e4e7"/>
+  <path d="M177 262h86v103h-86zM362 262h86v103h-86zM547 262h86v103h-86z" fill="#a7c7d9"/>
+  <path d="M747 205c0 58-16 100-58 100s-58-42-58-100h116z" fill="#9a6b3f"/>
+  <path d="M642 224h94M650 253h78M670 282h38" stroke="#6b4423" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="692" cy="305" r="8" fill="#27272a"/>
+  <path d="M718 330c35 6 58 24 69 55" stroke="#eab308" stroke-width="10" stroke-linecap="round" fill="none"/>
+  <path d="M780 388l-9-28 28 8" fill="#eab308"/>
+  <path d="M98 416h752" stroke="#3f3f46" stroke-width="6"/>
+  <path d="M126 456c84-24 156-22 215 6 72 34 145 28 218-18 54-34 132-36 235-6" stroke="#86a873" stroke-width="26" stroke-linecap="round" fill="none"/>
+</svg>

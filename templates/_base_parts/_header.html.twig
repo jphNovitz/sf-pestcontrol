@@ -1,0 +1,41 @@
+<header class="sticky top-0 z-50 border-b border-base-300 bg-base-100/95 backdrop-blur">
+    {% set header_site_name = settings is defined ? settings.siteName : 'Guêpes & Frelons' %}
+    {% set header_tagline = settings is defined ? settings.headerTagline : 'Intervention en Brabant wallon' %}
+    {% set header_logo_filename = settings is defined ? settings.logoFilename : null %}
+    {% set header_logo_alt = settings is defined ? settings.logoAlt : 'Logo ' ~ header_site_name %}
+    {% set header_whatsapp_phone = settings is defined ? settings.whatsappPhoneNumber|replace({'+': '', ' ': '', '-': ''}) : '32400000000' %}
+    {% set header_whatsapp_message = settings is defined ? settings.whatsappMessage : 'Bonjour, je souhaite une intervention pour un nid de guêpes/frelons en Brabant wallon.' %}
+    <div class="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
+        <div class="navbar min-h-20 px-0">
+            <div class="navbar-start">
+                <a href="{{ path('app_default') }}" class="flex items-center gap-3 no-underline">
+                    {% if header_logo_filename %}
+                        <img
+                            src="{{ asset('uploads/brand/logo/' ~ header_logo_filename) }}"
+                            alt="{{ header_logo_alt }}"
+                            class="h-11 w-auto max-w-40 object-contain"
+                        >
+                    {% else %}
+                        <span class="grid h-11 w-11 place-items-center rounded bg-warning text-xl font-black text-warning-content">GF</span>
+                    {% endif %}
+                    <span class="leading-tight">
+                        <span class="block text-lg font-bold text-base-content">{{ header_site_name }}</span>
+                        <span class="block text-sm text-base-content/70">{{ header_tagline }}</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="navbar-center hidden lg:flex" aria-label="Navigation principale">
+                <ul class="menu menu-horizontal gap-1 px-1">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#conseils">Conseils</a></li>
+                </ul>
+            </nav>
+
+            <div class="navbar-end gap-2">
+                <a href="#demande-intervention" class="btn btn-ghost hidden sm:inline-flex">Demander une intervention</a>
+                <a href="https://wa.me/{{ header_whatsapp_phone }}?text={{ header_whatsapp_message|url_encode }}" class="btn btn-warning">WhatsApp</a>
+            </div>
+        </div>
+    </div>
+</header>

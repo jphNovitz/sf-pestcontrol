@@ -1,0 +1,35 @@
+<h1>Nouvelle demande d'intervention</h1>
+
+<p>Une demande a été envoyée depuis la landing page.</p>
+
+<dl>
+    <dt>Nom</dt>
+    <dd>{{ request.name }}</dd>
+
+    <dt>Téléphone</dt>
+    <dd>{{ request.phone }}</dd>
+
+    <dt>Commune</dt>
+    <dd>{{ request.city }}</dd>
+
+    <dt>Adresse</dt>
+    <dd>{{ request.address }}</dd>
+
+    <dt>Nuisible</dt>
+    <dd>{{ request.pestType }}</dd>
+
+    <dt>Emplacement</dt>
+    <dd>{{ request.nestLocation }}</dd>
+
+    <dt>Urgence</dt>
+    <dd>{{ request.urgency }}</dd>
+</dl>
+
+{% if request.message %}
+    <h2>Message</h2>
+    <p>{{ request.message|nl2br }}</p>
+{% endif %}
+
+{% if request.photoFilename %}
+    <p>Une photo est jointe à cet email et enregistrée dans l'administration.</p>
+{% endif %}

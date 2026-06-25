@@ -1,0 +1,181 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Destruction de nids de guêpes et frelons asiatiques{% endblock %}
+
+{% block body %}
+    {% set whatsapp_phone = settings.whatsappPhoneNumber|replace({'+': '', ' ': '', '-': ''}) %}
+
+    <section class="bg-base-200">
+        <div class="mx-auto grid w-full max-w-screen-xl gap-10 px-4 py-14 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-20">
+            <div class="flex flex-col justify-center">
+                <div class="mb-5 flex flex-wrap gap-2" id="services">
+                    <span class="badge badge-warning">Guêpes</span>
+                    <span class="badge badge-warning">Frelons asiatiques</span>
+                    {% for zone in zones|slice(0, 3) %}
+                        <span class="badge badge-outline">{{ zone.name }}</span>
+                    {% else %}
+                        <span class="badge badge-outline">Brabant wallon</span>
+                    {% endfor %}
+                </div>
+
+                <h1 class="max-w-3xl text-4xl font-black leading-tight text-base-content sm:text-5xl">
+                    {{ settings.heroTitle }}
+                </h1>
+                <p class="max-w-2xl text-lg text-base-content/80">
+                    {{ settings.heroSubtitle }}
+                </p>
+
+                <div class="mt-4 flex flex-col gap-3 sm:flex-row">
+                    <a href="https://wa.me/{{ whatsapp_phone }}?text={{ settings.whatsappMessage|url_encode }}" class="btn btn-warning btn-lg">
+                        Demander sur WhatsApp
+                    </a>
+                    <a href="#demande-intervention" class="btn btn-outline btn-lg">Remplir le formulaire</a>
+                </div>
+
+                <div class="alert mt-8 border-warning/40 bg-warning/10 text-base-content">
+                    <span class="font-medium">{{ settings.emergencyNotice }}</span>
+                </div>
+            </div>
+
+            <div class="relative min-h-80 overflow-hidden rounded border border-base-300 bg-neutral text-neutral-content shadow-xl">
+                <img
+                    src="{{ asset('images/hero-nest.svg') }}"
+                    alt="Nid de guêpes ou de frelons sous une corniche"
+                    class="absolute inset-0 h-full w-full object-cover"
+                >
+                <div class="absolute inset-0 bg-neutral/55"></div>
+                <div class="relative flex h-full min-h-80 flex-col justify-end p-8">
+                    <div class="max-w-sm">
+                        <p class="text-sm font-semibold uppercase text-warning">Diagnostic à distance</p>
+                        <h2 class="mb-4 mt-2 text-3xl font-bold text-neutral-content">Une photo suffit souvent pour préparer l'intervention.</h2>
+                        <p class="mb-0 text-neutral-content/80">Localisation du nid, hauteur, activité observée et contraintes d'accès.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mx-auto w-full max-w-screen-xl px-4 py-14 sm:px-6 lg:px-8" id="demande-intervention">
+        <div class="grid gap-8 lg:grid-cols-[0.8fr_1.2fr]">
+            <div>
+                <p class="mb-2 font-semibold uppercase text-warning">Demande non urgente</p>
+                <h2 class="mt-0">Décrivez le nid à traiter</h2>
+                <p>
+                    {{ settings.formIntro }}
+                </p>
+                <p class="mb-0">
+                    Pour une situation urgente, utilisez le bouton WhatsApp afin de transmettre les premières informations plus vite.
+                </p>
+            </div>
+
+            {{ form_start(interventionForm, { attr: { class: 'grid gap-4 rounded border border-base-300 bg-base-100 p-5 shadow-sm' } }) }}
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <label class="fieldset">
+                        <span class="fieldset-legend">{{ interventionForm.name.vars.label }}</span>
+                        {{ form_widget(interventionForm.name, { attr: { class: 'input w-full', autocomplete: 'name' } }) }}
+                        {{ form_errors(interventionForm.name) }}
+                    </label>
+                    <label class="fieldset">
+                        <span class="fieldset-legend">{{ interventionForm.phone.vars.label }}</span>
+                        {{ form_widget(interventionForm.phone, { attr: { class: 'input w-full', autocomplete: 'tel' } }) }}
+                        {{ form_errors(interventionForm.phone) }}
+                    </label>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <label class="fieldset">
+                        <span class="fieldset-legend">{{ interventionForm.city.vars.label }}</span>
+                        {{ form_widget(interventionForm.city, { attr: { class: 'input w-full', autocomplete: 'address-level2' } }) }}
+                        {{ form_errors(interventionForm.city) }}
+                    </label>
+                    <label class="fieldset">
+                        <span class="fieldset-legend">{{ interventionForm.address.vars.label }}</span>
+                        {{ form_widget(interventionForm.address, { attr: { class: 'input w-full', autocomplete: 'street-address' } }) }}
+                        {{ form_errors(interventionForm.address) }}
+                    </label>
+                </div>
+
+                <div class="grid gap-4 sm:grid-cols-2">
+                    <label class="fieldset">
+                        <span class="fieldset-legend">{{ interventionForm.pestType.vars.label }}</span>
+                        {{ form_widget(interventionForm.pestType, { attr: { class: 'select w-full' } }) }}
+                        {{ form_errors(interventionForm.pestType) }}
+                    </label>
+                    <label class="fieldset">
+                        <span class="fieldset-legend">{{ interventionForm.nestLocation.vars.label }}</span>
+                        {{ form_widget(interventionForm.nestLocation, { attr: { class: 'select w-full' } }) }}
+                        {{ form_errors(interventionForm.nestLocation) }}
+                    </label>
+                </div>
+
+                <label class="fieldset">
+                    <span class="fieldset-legend">{{ interventionForm.urgency.vars.label }}</span>
+                    {{ form_widget(interventionForm.urgency, { attr: { class: 'select w-full' } }) }}
+                    {{ form_errors(interventionForm.urgency) }}
+                </label>
+
+                <label class="fieldset">
+                    <span class="fieldset-legend">{{ interventionForm.photo.vars.label }}</span>
+                    {{ form_widget(interventionForm.photo, { attr: { class: 'file-input w-full', accept: 'image/*' } }) }}
+                    {{ form_errors(interventionForm.photo) }}
+                </label>
+
+                <label class="fieldset">
+                    <span class="fieldset-legend">{{ interventionForm.message.vars.label }}</span>
+                    {{ form_widget(interventionForm.message, { attr: { class: 'textarea min-h-32 w-full', placeholder: "Hauteur approximative, accès, présence d'enfants, activité observée..." } }) }}
+                    {{ form_errors(interventionForm.message) }}
+                </label>
+
+                <div class="flex flex-col gap-3 sm:flex-row">
+                    {{ form_widget(interventionForm.submit, { attr: { class: 'btn btn-warning justify-start' } }) }}
+                    <a href="https://wa.me/{{ whatsapp_phone }}?text={{ settings.whatsappMessage|url_encode }}" class="btn btn-outline">Continuer sur WhatsApp</a>
+                </div>
+            {{ form_end(interventionForm) }}
+        </div>
+    </section>
+
+    <section class="bg-base-200" id="conseils">
+        <div class="mx-auto w-full max-w-screen-xl px-4 py-14 sm:px-6 lg:px-8">
+            <div class="mb-8 max-w-2xl">
+                <p class="mb-2 font-semibold uppercase text-warning">Avant l'intervention</p>
+                <h2 class="mt-0">Trois conseils simples</h2>
+            </div>
+
+            <div class="grid gap-5 md:grid-cols-3">
+                {% for advice in advices %}
+                    <article class="card rounded border border-base-300 bg-base-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mt-0 text-xl">{{ advice.title }}</h3>
+                            <p class="mb-0">{{ advice.body }}</p>
+                        </div>
+                    </article>
+                {% else %}
+                    <article class="card rounded border border-base-300 bg-base-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mt-0 text-xl">Ne bouchez pas l'entrée</h3>
+                            <p class="mb-0">Bloquer le passage peut déplacer l'activité vers l'intérieur du bâtiment et compliquer l'intervention.</p>
+                        </div>
+                    </article>
+
+                    <article class="card rounded border border-base-300 bg-base-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mt-0 text-xl">Gardez une distance de sécurité</h3>
+                            <p class="mb-0">Evitez les vibrations, les jets d'eau et les tentatives de destruction avec des produits non adaptés.</p>
+                        </div>
+                    </article>
+
+                    <article class="card rounded border border-base-300 bg-base-100 shadow-sm">
+                        <div class="card-body">
+                            <h3 class="card-title mt-0 text-xl">Préparez l'accès</h3>
+                            <p class="mb-0">Indiquez la hauteur, l'endroit exact et les obstacles éventuels pour faciliter le diagnostic.</p>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
