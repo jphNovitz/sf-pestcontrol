@@ -71,3 +71,7 @@ Texte associe a l'image du logo pour l'accessibilite. Il est configurable separe
 ## Tagline du header
 
 Phrase courte affichee sous le nom du site dans le header. Elle precise le positionnement ou la zone de service, par exemple `Intervention en Brabant wallon`, et se configure dans les reglages du site.
+
+## Header mobile compact
+
+Variation responsive du header pour petit ecran. Elle conserve le logo, le nom, la tagline et une action WhatsApp sous forme d'icone carree, tout en masquant la navigation secondaire et le bouton formulaire.

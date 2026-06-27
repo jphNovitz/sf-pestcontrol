@@ -6,21 +6,21 @@
     {% set header_whatsapp_phone = settings is defined ? settings.whatsappPhoneNumber|replace({'+': '', ' ': '', '-': ''}) : '32400000000' %}
     {% set header_whatsapp_message = settings is defined ? settings.whatsappMessage : 'Bonjour, je souhaite une intervention pour un nid de guêpes/frelons en Brabant wallon.' %}
     <div class="mx-auto w-full max-w-screen-xl px-4 sm:px-6 lg:px-8">
-        <div class="navbar min-h-20 px-0">
-            <div class="navbar-start">
-                <a href="{{ path('app_default') }}" class="flex items-center gap-3 no-underline">
+        <div class="navbar min-h-16 px-0 lg:min-h-20">
+            <div class="navbar-start min-w-0 flex-1">
+                <a href="{{ path('app_default') }}" class="flex min-w-0 items-center gap-3 no-underline">
                     {% if header_logo_filename %}
                         <img
                             src="{{ asset('uploads/brand/logo/' ~ header_logo_filename) }}"
                             alt="{{ header_logo_alt }}"
-                            class="h-11 w-auto max-w-40 object-contain"
+                            class="h-11 w-auto max-w-20 shrink-0 object-contain sm:max-w-40"
                         >
                     {% else %}
-                        <span class="grid h-11 w-11 place-items-center rounded bg-warning text-xl font-black text-warning-content">GF</span>
+                        <span class="grid h-11 w-11 shrink-0 place-items-center rounded bg-warning text-xl font-black text-warning-content">GF</span>
                     {% endif %}
-                    <span class="leading-tight">
-                        <span class="block text-lg font-bold text-base-content">{{ header_site_name }}</span>
-                        <span class="block text-sm text-base-content/70">{{ header_tagline }}</span>
+                    <span class="min-w-0 leading-tight">
+                        <span class="block truncate text-base font-bold text-base-content sm:text-lg">{{ header_site_name }}</span>
+                        <span class="block truncate text-xs text-base-content/70 sm:text-sm">{{ header_tagline }}</span>
                     </span>
                 </a>
             </div>
@@ -32,9 +32,18 @@
                 </ul>
             </nav>
 
-            <div class="navbar-end gap-2">
+            <div class="navbar-end w-auto gap-2">
                 <a href="#demande-intervention" class="btn btn-ghost hidden sm:inline-flex">Demander une intervention</a>
-                <a href="https://wa.me/{{ header_whatsapp_phone }}?text={{ header_whatsapp_message|url_encode }}" class="btn btn-warning">WhatsApp</a>
+                <a
+                    href="https://wa.me/{{ header_whatsapp_phone }}?text={{ header_whatsapp_message|url_encode }}"
+                    class="btn btn-warning h-11 min-h-11 w-11 shrink-0 px-0 sm:w-auto sm:px-4"
+                    aria-label="Demander une intervention sur WhatsApp"
+                >
+                    <svg class="h-5 w-5" viewBox="0 0 32 32" aria-hidden="true" focusable="false" fill="currentColor">
+                        <path d="M16.02 3.2c-7.03 0-12.75 5.7-12.75 12.72 0 2.24.59 4.43 1.7 6.36L3.16 28.8l6.68-1.75a12.74 12.74 0 0 0 6.18 1.58h.01c7.03 0 12.75-5.7 12.75-12.72 0-3.4-1.33-6.6-3.74-9.01a12.66 12.66 0 0 0-9.02-3.7Zm0 23.28h-.01c-1.92 0-3.8-.52-5.44-1.5l-.39-.23-3.96 1.04 1.06-3.86-.25-.4a10.53 10.53 0 0 1-1.61-5.6c0-5.83 4.76-10.57 10.61-10.57 2.83 0 5.49 1.1 7.49 3.1a10.47 10.47 0 0 1 3.1 7.47c0 5.82-4.76 10.55-10.6 10.55Zm5.82-7.91c-.32-.16-1.88-.93-2.17-1.03-.29-.11-.5-.16-.71.16-.21.32-.82 1.03-1 1.24-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.58-.95-.85-1.59-1.89-1.78-2.21-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.71-1.72-.98-2.35-.26-.62-.52-.53-.71-.54l-.61-.01c-.21 0-.56.08-.85.4-.29.32-1.12 1.09-1.12 2.66 0 1.56 1.15 3.08 1.31 3.29.16.21 2.27 3.45 5.49 4.83.77.33 1.37.53 1.84.68.77.24 1.47.21 2.02.13.62-.09 1.88-.77 2.15-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37Z"/>
+                    </svg>
+                    <span class="hidden sm:inline">WhatsApp</span>
+                </a>
             </div>
         </div>
     </div>
